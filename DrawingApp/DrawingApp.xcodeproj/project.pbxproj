@@ -10,6 +10,7 @@
 		F5329F6227D9E70700B7706C /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5329F6127D9E70700B7706C /* Rectangle.swift */; };
 		F5329F6427D9EC8800B7706C /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5329F6327D9EC8800B7706C /* Size.swift */; };
 		F5329F6627D9EC9B00B7706C /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5329F6527D9EC9B00B7706C /* Point.swift */; };
+		F53F6480288E91DD00855823 /* DrawingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53F647F288E91DD00855823 /* DrawingObject.swift */; };
 		F557CCCA285F7C090050C24D /* StatusSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F557CCC9285F7C090050C24D /* StatusSection.swift */; };
 		F55C78A828632D4B00E12764 /* addRectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = F55C78A728632D4B00E12764 /* addRectangle.png */; };
 		F5628865285E4B6E0071289E /* DrawingSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5628864285E4B6E0071289E /* DrawingSection.swift */; };
@@ -32,6 +33,7 @@
 		F5329F6127D9E70700B7706C /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		F5329F6327D9EC8800B7706C /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		F5329F6527D9EC9B00B7706C /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		F53F647F288E91DD00855823 /* DrawingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingObject.swift; sourceTree = "<group>"; };
 		F557CCC9285F7C090050C24D /* StatusSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSection.swift; sourceTree = "<group>"; };
 		F55C78A728632D4B00E12764 /* addRectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addRectangle.png; sourceTree = "<group>"; };
 		F5628864285E4B6E0071289E /* DrawingSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingSection.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				F5E3FD2A27E0F4150064883F /* RectangleFactory.swift */,
 				F5D3D0BF27E1A5E200B6DFDF /* Plane.swift */,
 				F5A6FA342876C29C000F68D1 /* Frame.swift */,
+				F53F647F288E91DD00855823 /* DrawingObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E3FD2B27E0F4150064883F /* RectangleFactory.swift in Sources */,
+				F53F6480288E91DD00855823 /* DrawingObject.swift in Sources */,
 				F56BAD112849F0FA00C607E4 /* MainView.swift in Sources */,
 				F5F9E3A32885BE69004314D4 /* StringExtension.swift in Sources */,
 				F5329F6227D9E70700B7706C /* Rectangle.swift in Sources */,
