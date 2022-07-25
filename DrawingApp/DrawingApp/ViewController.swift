@@ -3,6 +3,7 @@ import OSLog
 
 protocol DrawingSectionDelegate {
     func rectangleDidAdd()
+    func pictureDidAdd()
 }
 
 protocol StatusSectionDelegate: UITextFieldDelegate {
@@ -14,6 +15,8 @@ class ViewController: UIViewController {
     var plane: Plane = Plane()
 
     var selectedRectangle: String?
+
+    let imagePicker = UIImagePickerController()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -49,6 +52,7 @@ class ViewController: UIViewController {
         
         self.drawingSection.delegate = self
         self.statusSection.delegate = self
+        self.imagePicker.delegate = self
 
         let safeArea = view.safeAreaLayoutGuide
         
@@ -119,9 +123,24 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        if let newImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            print(newImage)
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
 extension ViewController: DrawingSectionDelegate {
     func rectangleDidAdd() {
         plane.addRectangle(frameWidth: self.view.safeAreaLayoutGuide.layoutFrame.width - self.statusSection.frame.width, frameHeight: self.view.safeAreaLayoutGuide.layoutFrame.height)
+    }
+
+    func pictureDidAdd() {
+        self.present(self.imagePicker, animated: true)
     }
 }
 

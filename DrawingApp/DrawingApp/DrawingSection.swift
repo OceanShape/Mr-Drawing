@@ -19,7 +19,17 @@ class DrawingSection: UIView {
         button.backgroundColor = .systemGray4
         button.layer.cornerRadius = 20
         button.setImage(UIImage(named: "addRectangle.png"), for: .normal)
-        button.addTarget(self, action: #selector(buttonTouched), for: .touchDown)
+        button.addTarget(self, action: #selector(addRectangleButtonTouched), for: .touchDown)
+        return button
+    }()
+
+    private let addPictureButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemGray4
+        button.layer.cornerRadius = 20
+        button.setImage(UIImage(named: "addPicture.png"), for: .normal)
+        button.addTarget(self, action: #selector(addPictureButtonTouched), for: .touchDown)
         return button
     }()
 
@@ -36,6 +46,7 @@ class DrawingSection: UIView {
     func setUpView() {
         self.addSubview(drawingView)
         self.addSubview(addRectangleButton)
+        self.addSubview(addPictureButton)
         
         NSLayoutConstraint.activate([
             self.drawingView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -46,7 +57,12 @@ class DrawingSection: UIView {
             self.addRectangleButton.widthAnchor.constraint(equalToConstant: 100),
             self.addRectangleButton.heightAnchor.constraint(equalToConstant: 100),
             self.addRectangleButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            self.addRectangleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            self.addRectangleButton.rightAnchor.constraint(equalTo: self.centerXAnchor),
+
+            self.addPictureButton.widthAnchor.constraint(equalToConstant: 100),
+            self.addPictureButton.heightAnchor.constraint(equalToConstant: 100),
+            self.addPictureButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            self.addPictureButton.leftAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
 
@@ -81,7 +97,11 @@ class DrawingSection: UIView {
         return self.rectangle[id]?.backgroundColor! ?? UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
     }
 
-    @objc func buttonTouched() {
+    @objc func addRectangleButtonTouched() {
         self.delegate?.rectangleDidAdd()
+    }
+
+    @objc func addPictureButtonTouched() {
+        self.delegate?.pictureDidAdd()
     }
 }
