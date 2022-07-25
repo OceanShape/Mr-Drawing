@@ -1,6 +1,6 @@
 import Foundation
 
-class Rectangle: DrawingObject {
+final class Rectangle: DrawingObject {
     var R: UInt8
     var G: UInt8
     var B: UInt8
