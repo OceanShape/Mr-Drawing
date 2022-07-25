@@ -22,7 +22,7 @@ class StatusSection: UIView {
         return label
     }()
 
-    let backgroundColorStatus: UITextField = {
+    private let backgroundColorStatus: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .alphabet

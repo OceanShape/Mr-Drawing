@@ -49,7 +49,6 @@ class ViewController: UIViewController {
         
         self.drawingSection.delegate = self
         self.statusSection.delegate = self
-        self.statusSection.backgroundColorStatus.delegate = self
 
         let safeArea = view.safeAreaLayoutGuide
         
