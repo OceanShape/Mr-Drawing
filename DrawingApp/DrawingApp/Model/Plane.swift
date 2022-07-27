@@ -13,6 +13,7 @@ struct Plane {
         print(rectangle)
         userInfo?["id"] = rectangle.id
         userInfo?["frame"] = rectangle.frame
+        userInfo?["RGB"] = rectangle.RGB
 
         NotificationCenter.default.post(name: Notification.Name("UpdatePlane"), object: nil, userInfo: userInfo)
     }

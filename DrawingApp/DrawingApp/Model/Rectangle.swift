@@ -13,6 +13,10 @@ final class Rectangle: DrawingObject {
     }
     
     var frame: Frame {
-        return Frame(size: self.size, point: self.point, R: self.R, G: self.G, B: self.B, alpha: self.alpha)
+        return Frame(size: self.size, point: self.point, alpha: self.alpha)
+    }
+
+    var RGB: [UInt8] {
+        return [self.R, self.G, self.B]
     }
 }
