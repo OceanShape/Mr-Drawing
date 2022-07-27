@@ -10,10 +10,11 @@ struct Plane {
         let rectangle = self.factory.createRandomRectangle(frameWidth: frameWidth, frameHeight: frameHeight)
         self.rectangle[rectangle.id] = rectangle
         var userInfo: [AnyHashable : Any]? = [:]
-        print(rectangle)
         userInfo?["id"] = rectangle.id
         userInfo?["frame"] = rectangle.frame
-        userInfo?["RGB"] = rectangle.RGB
+        userInfo?["R"] = rectangle.R
+        userInfo?["G"] = rectangle.G
+        userInfo?["B"] = rectangle.B
 
         NotificationCenter.default.post(name: Notification.Name("UpdatePlane"), object: nil, userInfo: userInfo)
     }
@@ -31,7 +32,7 @@ struct Plane {
     }
 
     func setRectangleAlpha(id: String, alpha: Float) {
-        rectangle[id]?.alpha = Int(alpha)
+        rectangle[id]?.frame.alpha = Int(alpha)
     }
 
     subscript(position: Point) -> String? {

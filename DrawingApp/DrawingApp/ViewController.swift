@@ -89,10 +89,12 @@ class ViewController: UIViewController {
         let userInfo = notification.userInfo!
         let id = userInfo["id"] as! String
         let frame = userInfo["frame"] as! Frame
-        let RGB = userInfo["RGB"] as! [UInt8]
-        os_log("id: %@, Frame: %@, RGB: %@", "\(id)", "\(frame)", "\(RGB)")
+        let R = userInfo["R"] as! UInt8
+        let G = userInfo["G"] as! UInt8
+        let B = userInfo["B"] as! UInt8
+        os_log("id: %@, Frame: %@, RGB: %@", "\(id)", "\(frame)", "\(R)", "\(G)", "\(B)")
         let rectangleView = UIView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
-        rectangleView.backgroundColor = UIColor(red: CGFloat(RGB[0])/255, green: CGFloat(RGB[1])/255, blue: CGFloat(RGB[2])/255, alpha: CGFloat(frame.alpha)/10)
+        rectangleView.backgroundColor = UIColor(red: CGFloat(R)/255, green: CGFloat(G)/255, blue: CGFloat(B)/255, alpha: CGFloat(frame.alpha)/10)
         self.drawingSection.addRectangle(id: id, rectangleView: rectangleView)
     }
 }
