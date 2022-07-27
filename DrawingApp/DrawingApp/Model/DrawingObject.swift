@@ -1,10 +1,20 @@
 import Foundation
 
-class DrawingObject: CustomStringConvertible {
-    let id: String
-    private var _alpha: Int = 10
-    var size: Size
-    var point: Point
+protocol DrawingObject {
+    var id: String { get }
+    var size: Size { get set }
+    var point: Point { get set }
+    var _alpha: Int { get set }
+    var alpha: Int { get set }
+    var frame: Frame { get }
+}
+
+extension DrawingObject {
+    var frame: Frame {
+        get {
+            return Frame(size: size, point: point, alpha: alpha)
+        }
+    }
     var alpha: Int {
         get {
             return self._alpha
@@ -20,18 +30,6 @@ class DrawingObject: CustomStringConvertible {
             }
         }
     }
-
-    init(id: String, size: Size, point: Point, alpha: Int) {
-        self.id = id
-        self.size = size
-        self.point = point
-        self.alpha = alpha
-    }
-    
-    var description: String {
-        return "(\(id)), X:\(point.X),Y:\(point.Y), W\(size.Width), H\(size.Height), alpha: \(alpha)"
-    }
-
     func isPointIncluded(position: Point) -> Bool {
         let X1: Double = self.point.X
         let X2: Double = self.point.X + self.size.Width
@@ -41,19 +39,5 @@ class DrawingObject: CustomStringConvertible {
             return true
         }
         return false
-    }
-}
-
-extension DrawingObject: Hashable {
-    static func == (lhs: DrawingObject, rhs: DrawingObject) -> Bool {
-        return lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-        hasher.combine(size.Width)
-        hasher.combine(size.Height)
-        hasher.combine(point.X)
-        hasher.combine(point.Y)
     }
 }

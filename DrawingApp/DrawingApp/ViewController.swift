@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         let id = userInfo["id"] as! String
         let frame = userInfo["frame"] as! Frame
         let RGB = userInfo["RGB"] as! [UInt8]
-        os_log("Frame %@", "\(frame)")
+        os_log("id: %@, Frame: %@, RGB: %@", "\(id)", "\(frame)", "\(RGB)")
         let rectangleView = UIView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
         rectangleView.backgroundColor = UIColor(red: CGFloat(RGB[0])/255, green: CGFloat(RGB[1])/255, blue: CGFloat(RGB[2])/255, alpha: CGFloat(frame.alpha)/10)
         self.drawingSection.addRectangle(id: id, rectangleView: rectangleView)
