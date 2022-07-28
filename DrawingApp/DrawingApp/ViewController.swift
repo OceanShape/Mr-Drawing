@@ -75,14 +75,20 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(rectangleDidDraw(_:)),
-            name: Notification.Name("UpdatePlane"),
+            name: Notification.Name("AddRectangle"),
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(imageDidDraw(_:)),
+            name: Notification.Name("AddImage"),
             object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("UpdatePlane"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("AddRectangle"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("AddImage"), object: nil)
     }
 
     @objc func rectangleDidDraw(_ notification: Notification) {
@@ -96,6 +102,18 @@ class ViewController: UIViewController {
         let rectangleView = UIView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
         rectangleView.backgroundColor = UIColor(red: CGFloat(R)/255, green: CGFloat(G)/255, blue: CGFloat(B)/255, alpha: CGFloat(frame.alpha)/10)
         self.drawingSection.addRectangle(id: id, rectangleView: rectangleView)
+    }
+    
+    @objc func imageDidDraw(_ notification: Notification) {
+        let userInfo = notification.userInfo!
+        let id = userInfo["id"] as! String
+        let frame = userInfo["frame"] as! Frame
+        let image = userInfo["image"] as! UIImage
+        
+        os_log("id: %@, Frame: %@, image: %@", "\(id)", "\(frame)", "\(image)")
+        let imageView = UIImageView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
+        imageView.image = image
+        self.drawingSection.addImage(id: id, imageView: imageView)
     }
 }
 
@@ -129,10 +147,10 @@ extension ViewController: UIGestureRecognizerDelegate {
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        if let newImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            print(newImage)
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            plane.addImage(frameWidth: self.view.safeAreaLayoutGuide.layoutFrame.width - self.statusSection.frame.width, frameHeight: self.view.safeAreaLayoutGuide.layoutFrame.height, image: image)
         }
-        
+
         picker.dismiss(animated: true, completion: nil)
     }
 }

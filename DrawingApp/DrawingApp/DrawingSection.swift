@@ -5,6 +5,7 @@ class DrawingSection: UIView {
     var delegate: DrawingSectionDelegate?
     
     var rectangle: [String: UIView] = [:]
+    var image: [String: UIImageView] = [:]
 
     private let drawingView: UIView = {
         let view = UIView()
@@ -69,6 +70,11 @@ class DrawingSection: UIView {
     func addRectangle(id: String, rectangleView: UIView) {
         self.rectangle[id] = rectangleView
         self.drawingView.addSubview(rectangleView)
+    }
+
+    func addImage(id: String, imageView: UIImageView) {
+        self.image[id] = imageView
+        // self.drawingView.addSubview(imageView)
     }
     
     func setRectangleBorder(selectedRectangle: String, state: BorderState) {

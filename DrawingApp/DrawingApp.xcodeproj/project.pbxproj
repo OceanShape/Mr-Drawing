@@ -27,7 +27,7 @@
 		F5C7310027CC7AB8001B4EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5C730FE27CC7AB8001B4EFF /* LaunchScreen.storyboard */; };
 		F5D3D0C027E1A5E200B6DFDF /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D3D0BF27E1A5E200B6DFDF /* Plane.swift */; };
 		F5D6F2D627E639D50072440B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D6F2D527E639D50072440B /* Tests.swift */; };
-		F5E3FD2B27E0F4150064883F /* RectangleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E3FD2A27E0F4150064883F /* RectangleFactory.swift */; };
+		F5E3FD2B27E0F4150064883F /* DrawingObjectFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E3FD2A27E0F4150064883F /* DrawingObjectFactory.swift */; };
 		F5F9E3A32885BE69004314D4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F9E3A22885BE69004314D4 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +55,7 @@
 		F5D3D0BF27E1A5E200B6DFDF /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		F5D6F2D327E639D50072440B /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D6F2D527E639D50072440B /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		F5E3FD2A27E0F4150064883F /* RectangleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleFactory.swift; sourceTree = "<group>"; };
+		F5E3FD2A27E0F4150064883F /* DrawingObjectFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingObjectFactory.swift; sourceTree = "<group>"; };
 		F5F9E3A22885BE69004314D4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 				F5329F6127D9E70700B7706C /* Rectangle.swift */,
 				F5329F6327D9EC8800B7706C /* Size.swift */,
 				F5329F6527D9EC9B00B7706C /* Point.swift */,
-				F5E3FD2A27E0F4150064883F /* RectangleFactory.swift */,
+				F5E3FD2A27E0F4150064883F /* DrawingObjectFactory.swift */,
 				F5D3D0BF27E1A5E200B6DFDF /* Plane.swift */,
 				F5A6FA342876C29C000F68D1 /* Frame.swift */,
 				F53F647F288E91DD00855823 /* DrawingObject.swift */,
@@ -256,7 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5E3FD2B27E0F4150064883F /* RectangleFactory.swift in Sources */,
+				F5E3FD2B27E0F4150064883F /* DrawingObjectFactory.swift in Sources */,
 				F53F6480288E91DD00855823 /* DrawingObject.swift in Sources */,
 				F56BAD112849F0FA00C607E4 /* MainView.swift in Sources */,
 				F5F9E3A32885BE69004314D4 /* StringExtension.swift in Sources */,
