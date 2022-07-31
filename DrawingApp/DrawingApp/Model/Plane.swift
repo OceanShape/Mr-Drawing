@@ -47,6 +47,10 @@ struct Plane {
         (self.drawingObject[id] as? Rectangle)?.frame.alpha = Int(alpha)
     }
 
+    mutating func setObjectAlpha(id: String, alpha: Float) {
+        self.drawingObject[id]!.frame.alpha = Int(alpha)
+    }
+
     subscript(position: Point) -> String? {
         for (_, value) in self.drawingObject.reversed() {
             if value.isPointIncluded(position: position) == true {
