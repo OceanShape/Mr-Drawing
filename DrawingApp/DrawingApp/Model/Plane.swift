@@ -43,10 +43,6 @@ struct Plane {
         (self.drawingObject[id] as? Rectangle)?.B = B
     }
 
-    func setRectangleAlpha(id: String, alpha: Float) {
-        (self.drawingObject[id] as? Rectangle)?.frame.alpha = Int(alpha)
-    }
-
     mutating func setObjectAlpha(id: String, alpha: Float) {
         self.drawingObject[id]!.frame.alpha = Int(alpha)
     }

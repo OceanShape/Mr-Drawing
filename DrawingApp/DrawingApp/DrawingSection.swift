@@ -3,9 +3,8 @@ import UIKit
 class DrawingSection: UIView {
     
     var delegate: DrawingSectionDelegate?
-    
-    var rectangle: [String: UIView] = [:]
-    var image: [String: UIImageView] = [:]
+
+    var drawingObject: [String: UIView] = [:]
 
     private let drawingView: UIView = {
         let view = UIView()
@@ -67,40 +66,36 @@ class DrawingSection: UIView {
         ])
     }
 
-    func addRectangle(id: String, rectangleView: UIView) {
-        self.rectangle[id] = rectangleView
-        self.drawingView.addSubview(rectangleView)
-    }
-
-    func addImage(id: String, imageView: UIImageView) {
-        self.image[id] = imageView
-        // self.drawingView.addSubview(imageView)
+    func addObject(id: String, objectView: UIView) {
+        self.drawingObject[id] = objectView
+        self.drawingView.addSubview(objectView)
     }
     
-    func setRectangleBorder(selectedRectangle: String, state: BorderState) {
+    func setObjectBorder(selectedObject: String, state: BorderState) {
         switch state {
         case .selected:
-            self.rectangle[selectedRectangle]!.layer.borderWidth = CGFloat(5.0)
-            self.rectangle[selectedRectangle]!.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+            self.drawingObject[selectedObject]!.layer.borderWidth = CGFloat(5.0)
+            self.drawingObject[selectedObject]!.layer.borderColor = CGColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
         case .unselected:
-            self.rectangle[selectedRectangle]!.layer.borderWidth = CGFloat(0.0)
+            self.drawingObject[selectedObject]!.layer.borderWidth = CGFloat(0.0)
         }
     }
 
+    func getRectangleColor(id: String) -> UIColor? {
+        return self.drawingObject[id]?.backgroundColor
+    }
+
+    func getObjectAlpha(id: String) -> Float {
+        return Float(self.drawingObject[id]?.alpha ?? 1.0)
+    }
+
     func setRectangleColor(id: String, color: UIColor?) {
-        rectangle[id]?.backgroundColor = color?.withAlphaComponent(rectangle[id]?.backgroundColor?.alphaFloat ?? 1.0)
+        guard drawingObject[id] as? UIImageView == nil else { return }
+        drawingObject[id]?.backgroundColor = color?.withAlphaComponent(drawingObject[id]?.backgroundColor?.alphaFloat ?? 1.0)
     }
 
-    func setRectangleAlpha(id: String, alpha: Float) {
-        let color = self.rectangle[id]!.backgroundColor!.rgbFloat
-        let r = color.red
-        let g = color.green
-        let b = color.blue
-        self.rectangle[id]!.backgroundColor = UIColor(red: r, green: g, blue: b, alpha: CGFloat(alpha / 10.0))
-    }
-
-    func getRectangleColor(id: String) -> UIColor {
-        return self.rectangle[id]?.backgroundColor! ?? UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+    func setObjectAlpha(id: String, alpha: Float) {
+        self.drawingObject[id]!.alpha = CGFloat(alpha)/10
     }
 
     @objc func addRectangleButtonTouched() {

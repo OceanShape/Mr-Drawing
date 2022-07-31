@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     var plane: Plane = Plane()
 
-    var selectedRectangle: String?
+    var selectedObject: String?
 
     let imagePicker = UIImagePickerController()
 
@@ -99,9 +99,10 @@ class ViewController: UIViewController {
         let G = userInfo["G"] as! UInt8
         let B = userInfo["B"] as! UInt8
         os_log("id: %@, Frame: %@, RGB: %@", "\(id)", "\(frame)", "\(R)", "\(G)", "\(B)")
-        let rectangleView = UIView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
-        rectangleView.backgroundColor = UIColor(red: CGFloat(R)/255, green: CGFloat(G)/255, blue: CGFloat(B)/255, alpha: CGFloat(frame.alpha)/10)
-        self.drawingSection.addRectangle(id: id, rectangleView: rectangleView)
+        let view = UIView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
+        view.backgroundColor = UIColor(red: CGFloat(R)/255, green: CGFloat(G)/255, blue: CGFloat(B)/255, alpha: CGFloat(1.0))
+        view.alpha = CGFloat(frame.alpha)/10
+        self.drawingSection.addObject(id: id, objectView: view)
     }
     
     @objc func imageDidDraw(_ notification: Notification) {
@@ -113,7 +114,8 @@ class ViewController: UIViewController {
         os_log("id: %@, Frame: %@, image: %@", "\(id)", "\(frame)", "\(image)")
         let imageView = UIImageView(frame: CGRect(x: frame.point.X, y: frame.point.Y, width: frame.size.Width, height: frame.size.Height))
         imageView.image = image
-        self.drawingSection.addImage(id: id, imageView: imageView)
+        imageView.alpha = CGFloat(frame.alpha)/10
+        self.drawingSection.addObject(id: id, objectView: imageView)
     }
 }
 
@@ -123,23 +125,31 @@ extension ViewController: UIGestureRecognizerDelegate {
 
         self.view.endEditing(true)
 
-        if self.selectedRectangle != nil {
-            self.drawingSection.setRectangleBorder(selectedRectangle: self.selectedRectangle!, state: BorderState.unselected)
+        if self.selectedObject != nil {
+            self.drawingSection.setObjectBorder(selectedObject: self.selectedObject!, state: BorderState.unselected)
         }
 
-        guard let rectangle = self.plane[Point(X: CGPosition.x, Y: CGPosition.y)] else {
-            self.selectedRectangle = nil
-            self.statusSection.setUserInteractionEnabled(isEnable: false)
+        guard let object = self.plane[Point(X: CGPosition.x, Y: CGPosition.y)] else {
+            self.selectedObject = nil
+            self.statusSection.setColorStatusEnabled(isEnable: false)
+            self.statusSection.setAlphaStatusEnabled(isEnable: false)
             return false
         }
 
-        self.selectedRectangle = rectangle
-        self.drawingSection.setRectangleBorder(selectedRectangle: self.selectedRectangle!, state: BorderState.selected)
 
-        let color = self.drawingSection.getRectangleColor(id: rectangle)
-        self.statusSection.setUserInteractionEnabled(isEnable: true)
-        self.statusSection.setColor(color: color)
-        self.statusSection.setAlpha(alpha: Float(color.cgColor.alpha))
+        self.selectedObject = object
+        self.drawingSection.setObjectBorder(selectedObject: self.selectedObject!, state: BorderState.selected)
+
+        self.statusSection.setAlphaStatusEnabled(isEnable: true)
+        self.statusSection.setAlpha(alpha: self.drawingSection.getObjectAlpha(id: object))
+
+        if let color = self.drawingSection.getRectangleColor(id: object) {
+            self.statusSection.setColorStatusEnabled(isEnable: true)
+            self.statusSection.setColor(color: color)
+        } else {
+            self.statusSection.setColorStatusEnabled(isEnable: false)
+        }
+
         return true
     }
 }
@@ -175,7 +185,7 @@ extension ViewController: StatusSectionDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let rectangle = self.selectedRectangle else { return }
+        guard let rectangle = self.selectedObject else { return }
 
         if textField.text?.count == 6 {
             let color = UIColor(hexRGB: textField.text!)
@@ -186,7 +196,7 @@ extension ViewController: StatusSectionDelegate {
 
             textField.text = "#" + textField.text!
         } else {
-            self.statusSection.setColor(color: self.drawingSection.getRectangleColor(id: rectangle))
+            self.statusSection.setColor(color: self.drawingSection.getRectangleColor(id: rectangle)!)
         }
     }
     
@@ -216,9 +226,7 @@ extension ViewController: StatusSectionDelegate {
     }
 
     func alphaDidChanged(alpha: Float) {
-        if let rectangle = self.selectedRectangle {
-            self.drawingSection.setRectangleAlpha(id: rectangle, alpha: alpha)
-            self.plane.setRectangleAlpha(id: rectangle, alpha: alpha)
-        }
+        self.drawingSection.setObjectAlpha(id: self.selectedObject!, alpha: alpha)
+        self.plane.setObjectAlpha(id: self.selectedObject!, alpha: alpha)
     }
 }

@@ -81,18 +81,24 @@ class StatusSection: UIView {
         ])
     }
 
-    func setUserInteractionEnabled(isEnable: Bool) {
+    func setColorStatusEnabled(isEnable: Bool) {
         self.backgroundColorStatus.isUserInteractionEnabled = isEnable
-        self.alphaStatus.isUserInteractionEnabled = isEnable
 
         if isEnable == false {
             self.backgroundColorStatus.text = "None"
+        }
+
+        self.backgroundColorStatus.layer.opacity = isEnable ? Float(1.0): Float(0.5)
+    }
+
+    func setAlphaStatusEnabled(isEnable: Bool) {
+        self.alphaStatus.isUserInteractionEnabled = isEnable
+
+        if isEnable == false {
             self.alphaStatus.value = 5
         }
 
-        let opacity = isEnable ? Float(1.0): Float(0.5)
-        self.backgroundColorStatus.layer.opacity = opacity
-        self.alphaStatus.layer.opacity = opacity
+        self.alphaStatus.layer.opacity = isEnable ? Float(1.0): Float(0.5)
     }
 
     func setColor(color: UIColor) {
